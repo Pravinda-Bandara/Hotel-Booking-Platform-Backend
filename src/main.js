@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/bookings', bookingRoutes);
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT,()=>{

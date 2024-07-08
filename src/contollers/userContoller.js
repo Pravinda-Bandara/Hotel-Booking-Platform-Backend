@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import User from "../models/User.js";
 import {generateToken} from "../utils/tokenUtils.js";
 import bcrypt from 'bcryptjs';
+import Booking from "../models/Booking.js";
 
 
 
@@ -46,5 +47,18 @@ export const signin = asyncHandler(async (req, res) => {
     } else {
         // Send error if credentials are incorrect
         res.status(401).send({ message: 'Invalid email or password' });
+    }
+});
+
+// Get Bookings by User ID
+export const getBookingsByUserId = asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
+    console.log(req.params.userId)
+    const bookings = await Booking.find({ userId });
+
+    if (bookings) {
+        res.json(bookings);
+    } else {
+        res.status(404).json({ message: 'Bookings not found for this user' });
     }
 });
