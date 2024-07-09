@@ -6,6 +6,7 @@ import {
     getBookings,
     updateBooking
 } from "../contollers/BookingContoller.js";
+import {getBookingsByUserId} from "../contollers/userContoller.js";
 const router = express.Router();
 
 router.get('/:id', getBookingById);
@@ -15,6 +16,8 @@ router.delete('/:id', deleteBooking);
 router.post('/', createBooking);
 router.get('/', getBookings);
 
+
+router.get('/user/:userId', getBookingsByUserId);
 
 
 
