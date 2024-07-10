@@ -1,59 +1,59 @@
-# Course Management System
+# Hotel Booking Platform
 
 ## Version
 0.1.0
 
+#### Front-end  - https://github.com/Pravinda-Bandara/Hotel-Booking-Platform-Frontend
+
 ## Introduction
 
-Welcome to our Course Management System! This platform allows visitors to register and log in, after which they can explore and enroll in courses. Users can view course details and enroll in subjects of their choice. Admin users have additional privileges to manage users, courses, and student enrollments. Our backend, powered by the MERN stack (MongoDB, Express.js, React.js, Node.js), efficiently handles HTTP requests, user authentication using JWT (JSON Web Tokens), and database interactions.
+Welcome to our Hotel Booking Platform! This platform allows users to register and log in securely using JWT (JSON Web Tokens). Once logged in, users can manage their bookings with a user-friendly interface. The backend, powered by the MERN stack (MongoDB, Express.js, React.js, Node.js), efficiently handles HTTP requests, user authentication, and database interactions.
 
-### License
-Copyright &copy; 2024 Pravinda Bandara. All Right Reserved <br>
-This Project is licensed under the [MIT](LICENSE.txt) License.
+### Features
 
+#### User Features
+- **User Authentication:** Users can securely register and log in.
+- **Booking Management:** Users can create, read, update, and delete bookings.
+- **JWT Authorization:** Supports JWT authorization with USER and ADMIN roles for scalable application security.
+- **Data Security:** Passwords are hashed using bcrypt for enhanced security.
+- **Responsive Design:** The application is responsive and optimized for both desktop and mobile devices.
 
+### Backend Technologies Used
 
+- **Database:** MongoDB with Mongoose
+- **Server:** Node.js with Express
 
-## Models
-#### User Model
-- **Fields:** email, name, password, number, role
-- **Description:** Represents a user in the system. Users can have roles 'student' or 'admin'.
-#### Course Model
-- **Fields:** title, description, duration, instructor, instructor_num
-- **Description:** Represents a course in the system.
-#### Enrollment Model
-- **Fields:** studentId, courseId, studentEmail, courseName
-- **Description:** Represents an enrollment in a course. Stores the ID of the student, the ID of the course, the student's email, and the course name.
+### Schemas
+
+#### Booking Schema
+- **userId:** Reference to the user who made the booking.
+- **hotelName:** Name of the hotel.
+- **checkInDateTime:** Date and time for check-in.
+- **checkOutDateTime:** Date and time for check-out.
+- **guestName:** Name of the guest.
+- **guestPhoneNumber:** Phone number of the guest.
+- **status:** Booking status (Pending, Confirmed, Cancelled).
+- **description:** Additional booking details.
+
+#### User Schema
+- **email:** User's email address.
+- **password:** User's hashed password.
+- **role:** User's role (USER or ADMIN).
 
 ### Routes
-#### User Routes
-- **GET /users:** Get all users (Admin)
-- **GET /users/:id:** Get user by ID (Admin)
-- **POST /users/signin:** Sign in (Visitor)
-- **POST /users/signup:** Sign up (Visitor)
-- **PATCH /users/:id:** Update user by ID (Admin)
-- **DELETE /users/:id:** Delete user by ID (Admin)
-
-#### Course Routes
-- **GET /courses:** Get all courses (User)
-- **GET /courses/:id:** Get course by ID (User)
-- **POST /courses:** Create course (Admin) (User)
-- **PATCH /courses/:id:** Update course by ID (Admin)
-- **DELETE /courses/:id:** Delete course by ID (Admin)
-
-#### Enrollment Routes
-- **GET /enrollments/status:** Get enrollment status (User)
-- **GET /enrollments/:studentId:** Get enrollments by student ID (User)
-- **GET /enrollments/detailed/:studentId:** Get detailed enrollments by student ID (Admin)
-- **POST /enrollments:** Create enrollment  (User)
-- **DELETE /enrollments/:id:** Delete enrollment by ID (User)
-
-## Backend Technologies Used
-- **Framework:** Node.js with Express
-- **Database:** MongoDB with Mongoose
-- **Authentication:** JSON Web Tokens (JWT)
+- **User Registration:** `POST /api/v1/users/signup`
+- **User Login:** `POST /api/v1/users/signin`
+- **Get User Bookings:** `GET /api/v1/bookings/user/:userId`
+- **Create Booking:** `POST /api/v1/bookings`
+- **Get Booking By ID:** `GET /api/v1/bookings/:bookingId`
+- **Update Booking:** `PUT /api/v1/bookings/:bookingId`
+- **Delete Booking:** `DELETE /api/v1/bookings/:bookingId`
 
 ## Usage Disclaimer
 
-This project and its associated code are intended for educational and learning purposes only. Commercial use of the application is not permitted.
+This project and its associated code are used for educational and learning purposes. The application and any included code are not intended for commercial use.
 
+## License
+
+Copyright &copy; 2024 Pravinda. All Rights Reserved <br>
+This project is licensed under the [MIT License](LICENSE.txt).
