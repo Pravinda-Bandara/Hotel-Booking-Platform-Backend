@@ -1,13 +1,20 @@
 import asyncHandler from 'express-async-handler';
 import User from "../models/User.js";
-import {generateToken} from "../utils/tokenUtils.js";
+import { generateToken } from "../utils/tokenUtils.js";
 import bcrypt from 'bcryptjs';
-import Booking from "../models/Booking.js";
-
+import {validateEmail, validatePassword} from "../utils/userValidation.js";
 
 
 export const signup = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
+
+    // Validate email and password
+    if (!validateEmail(email)) {
+        return res.status(400).send({ message: 'Invalid email format or email is empty' });
+    }
+    if (!validatePassword(password)) {
+        return res.status(400).send({ message: 'Password must not be empty' });
+    }
 
     // Check if user with the given email already exists
     const existingUser = await User.findOne({ email });
@@ -30,9 +37,16 @@ export const signup = asyncHandler(async (req, res) => {
     });
 });
 
-
 export const signin = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
+
+    // Validate email and password
+    if (!validateEmail(email)) {
+        return res.status(400).send({ message: 'Invalid email format or email is empty' });
+    }
+    if (!validatePassword(password)) {
+        return res.status(400).send({ message: 'Password must be at least 6 characters long or password is empty' });
+    }
 
     // Find the user by email
     const user = await User.findOne({ email });
@@ -47,18 +61,5 @@ export const signin = asyncHandler(async (req, res) => {
     } else {
         // Send error if credentials are incorrect
         res.status(401).send({ message: 'Invalid email or password' });
-    }
-});
-
-// Get Bookings by User ID
-export const getBookingsByUserId = asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
-    console.log(req.params.userId)
-    const bookings = await Booking.find({ userId });
-
-    if (bookings) {
-        res.json(bookings);
-    } else {
-        res.status(404).json({ message: 'Bookings not found for this user' });
     }
 });

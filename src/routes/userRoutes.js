@@ -1,4 +1,4 @@
-import {getBookingsByUserId, signin, signup} from "../contollers/userContoller.js";
+import { signin, signup} from "../contollers/userContoller.js";
 import express from "express";
 
 const router = express.Router();
