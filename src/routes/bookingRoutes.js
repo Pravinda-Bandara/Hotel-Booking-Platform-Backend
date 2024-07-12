@@ -4,9 +4,10 @@ import {
     deleteBooking,
     getBookingById,
     getBookings,
+    getBookingsByUserId,
     updateBooking
 } from "../contollers/BookingContoller.js";
-import {getBookingsByUserId} from "../contollers/userContoller.js";
+
 const router = express.Router();
 
 router.get('/:id', getBookingById);

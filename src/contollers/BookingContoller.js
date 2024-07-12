@@ -73,6 +73,19 @@ export const deleteBooking = asyncHandler(async (req, res) => {
     }
 });
 
+// Get Bookings by User ID
+export const getBookingsByUserId = asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
+    console.log(req.params.userId)
+    const bookings = await Booking.find({ userId });
+
+    if (bookings) {
+        res.json(bookings);
+    } else {
+        res.status(404).json({ message: 'Bookings not found for this user' });
+    }
+});
+
 
 // Export all functions
 export default {
@@ -80,5 +93,6 @@ export default {
     getBookings,
     getBookingById,
     updateBooking,
-    deleteBooking
+    deleteBooking,
+    getBookingsByUserId
 };
